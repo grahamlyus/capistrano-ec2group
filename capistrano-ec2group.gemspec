@@ -16,6 +16,6 @@ Gem::Specification.new do |s|
   s.files = ["MIT-LICENSE", "Rakefile", "README.markdown", "lib/capistrano/ec2group.rb", "test/ec2group_test.rb"]
   s.require_paths = ["lib"]
   
-  s.add_dependency "capistrano", ">=2.1.0"
-  s.add_dependency "right_aws", ">=3.0.0"
+  s.add_dependency "capistrano", "~> 2.1"
+  s.add_dependency "aws-sdk", "~> 2.0"
 end

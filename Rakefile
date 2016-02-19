@@ -1,6 +1,6 @@
 require 'rake'
 require 'rake/testtask'
-require 'rake/rdoctask'
+require 'rdoc/task'
 
 desc 'Default: run unit tests.'
 task :default => :test
@@ -14,7 +14,7 @@ Rake::TestTask.new(:test) do |t|
 end
 
 desc 'Generate documentation for the capistrano-ec2group plugin.'
-Rake::RDocTask.new(:rdoc) do |rdoc|
+RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title    = 'capistrano-ec2group'
   rdoc.options << '--line-numbers' << '--inline-source'

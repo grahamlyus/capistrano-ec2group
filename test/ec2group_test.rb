@@ -1,6 +1,8 @@
 require 'test/unit'
 require 'yaml'
 require 'rubygems/specification'
+require 'capistrano'
+require 'capistrano/ec2group'
 
 class CapistranoTest < Test::Unit::TestCase
   def test_build_gem
@@ -14,5 +16,15 @@ class CapistranoTest < Test::Unit::TestCase
     end
 
     assert spec.validate
+  end
+
+  def test_instances_running_in_group
+    wp2 = EC2Groups.instances_running_in_group('production-wp2', 'us-east-1', ENV['AWS_ACCESS_KEY'], ENV['AWS_SECRET_KEY'])
+    puts wp2.to_json
+    assert wp2.count == 1
+
+    api = EC2Groups.instances_running_in_group('production-api', 'us-east-1', ENV['AWS_ACCESS_KEY'], ENV['AWS_SECRET_KEY'])
+    puts api.to_json
+    assert api.count == 2
   end
 end
