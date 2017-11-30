@@ -10,7 +10,7 @@ class CapistranoTest < Test::Unit::TestCase
     spec = nil
 
     if data !~ %r{!ruby/object:Gem::Specification}
-      Thread.new { spec = eval("$SAFE = 3\n#{data}") }.join
+      Thread.new { spec = eval("$SAFE = 1\n#{data}") }.join
     else
       spec = YAML.load(data)
     end
@@ -19,11 +19,11 @@ class CapistranoTest < Test::Unit::TestCase
   end
 
   def test_instances_running_in_group
-    wp2 = EC2Groups.instances_running_in_group('production-wp2', 'us-east-1', ENV['AWS_ACCESS_KEY'], ENV['AWS_SECRET_KEY'])
+    wp2 = EC2Groups.instances_running_in_group('production-adminv', 'us-east-1', ENV['AWS_ACCESS_KEY'], ENV['AWS_SECRET_KEY'])
     puts wp2.to_json
     assert wp2.count == 1
 
-    api = EC2Groups.instances_running_in_group('production-api', 'us-east-1', ENV['AWS_ACCESS_KEY'], ENV['AWS_SECRET_KEY'])
+    api = EC2Groups.instances_running_in_group('production-apiv', 'us-east-1', ENV['AWS_ACCESS_KEY'], ENV['AWS_SECRET_KEY'])
     puts api.to_json
     assert api.count == 2
   end

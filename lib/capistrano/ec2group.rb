@@ -1,4 +1,4 @@
-require 'aws-sdk'
+require 'aws-sdk-ec2'
 
 unless Capistrano::Configuration.respond_to?(:instance)
   abort "capistrano/ec2group requires Capistrano 2"
@@ -33,7 +33,7 @@ module Capistrano
       # Associate a group of EC2 instances with a role. In order to use this, you
       # must use the security groups feature in Amazon EC2 to group your servers
       # by role.
-      # 
+      #
       # First, specify the security group name, then the roles and params:
       #
       #   group :webserver, :web
@@ -44,7 +44,7 @@ module Capistrano
         instances.each {|instance|server(instance, *args)}
       end
     end
-    
+
     include Groups
   end
 end
